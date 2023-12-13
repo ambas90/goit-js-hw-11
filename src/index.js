@@ -11,12 +11,13 @@ let page;
 let searchQuery;
 let imageCounter = 0;
 const imagesPerPage = 40;
+let lightbox;
 
 //wyszukiwanie elementów dom
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
-const galleryItems = document.querySelectorAll('.gallery-item');
+
 //początkowe ukrycie przycisku load-more
 loadMoreBtn.style.display = 'none';
 
@@ -104,8 +105,20 @@ function photosRenderer(data) {
     )
     .join('');
   gallery.insertAdjacentHTML('beforeend', html);
-  const galleryItems = document.querySelectorAll('.gallery-item');
-  new SimpleLightbox(galleryItems);
+
+  if (page === 1) {
+    lightbox = new SimpleLightbox('.gallery a');
+  } else {
+    lightbox.refresh();
+    const { height: cardHeight } = document
+      .querySelector('.gallery')
+      .firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+  }
 }
 
 //nasłuchiwanie kliknięcia na submit
