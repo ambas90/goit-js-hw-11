@@ -3,7 +3,6 @@ import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import axios from 'axios';
-const axios = require('axios').default;
 axios.defaults.headers.common['x-api-key'] =
   '41220489-c07c1811e7eaf580f7e0f31fa';
 
